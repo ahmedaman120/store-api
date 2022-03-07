@@ -5,6 +5,10 @@ These are the notes from a meeting with the frontend developer that describe wha
 
 ## API Endpoints
 #### Products
+| Name | URL |  Description|
+| -----| --- | ------------------- |
+| index | /product | this endpoint list all products after check token|
+
 - Index 
 - Show
 - Create [token required]
