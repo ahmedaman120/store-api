@@ -2,14 +2,14 @@
     "dev": {
         "driver": "pg",
         "host": "127.0.0.1",
-        "database": "my_review",
+        "database": "store",
         "user": "ahmedayman199",
         "password": "admin123"
     },
     "test": {
         "driver": "pg",
         "host": "127.0.0.1",
-        "database": "test",
+        "database": "store_test",
         "user": "ahmedayman199",
         "password": "admin123"
     }
