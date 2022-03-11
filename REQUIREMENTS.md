@@ -6,6 +6,7 @@ These are the notes from a meeting with the frontend developer that describe wha
 ## API Endpoints
 #### Products
 | Name | URL |  Description|
+|------|-----|--------------|
 | index(GET) | /products | this endpoint list all products |
 | show(GET) | /products/:id | this endpoint list one product|
 | create(POST) | /products | this endpoint accept headers authorization to check the user and then get body to save on product|
