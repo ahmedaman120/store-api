@@ -1,12 +1,21 @@
 import express, { Request, Response } from 'express'
+import { User } from '../../models/M_users/user'
 
 const index = async (_req: Request, res: Response) => {
-  const users = []
+  const users: User[] =[ {
+      first_name: 'ahmed',
+      last_name: 'ayman',
+      password: 'sakdnlsd',
+  }]
   res.json(users)
 }
 const show = async (_req: Request, res: Response) => {
-  const users = []
-  res.json(users)
+  const user: User = {
+    first_name: 'ahmed',
+    last_name: 'ayman',
+    password: 'sakdnlsd',
+  }
+  res.json(user)
 }
 const create = async (req: Request, res: Response) => {
   try {
@@ -18,7 +27,7 @@ const create = async (req: Request, res: Response) => {
       // - status of order (active or complete)
     }
     const newUser = {} //async call to model
-    res.json({})
+    res.json(newUser)
   } catch (err) {
     res.status(400)
     res.json(err)

@@ -10,13 +10,7 @@ These are the notes from a meeting with the frontend developer that describe wha
 | index(GET) | /products | this endpoint list all products |
 | show(GET) | /products/:id | this endpoint list one product|
 | create(POST) | /products | this endpoint accept headers authorization to check the user and then get body to save on product|
-
-
-- Index 
-- Show
-- Create [token required]
-- [OPTIONAL] Top 5 most popular products 
-- [OPTIONAL] Products by category (args: product category)
+| destroy(DELETE) | /products/:id | this endpoint accept headers authorization to check the user and then get body to save on product|
 
 #### Users
 - Index [token required]
