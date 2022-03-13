@@ -32,16 +32,13 @@ class UserStore {
       throw new Error(`Cannot get this ${id} book  ${err}`)
     }
   }
-  async login(id: number): Promise<User[]> {
-    try {
-      const conn = client.connect()
-      const sql = 'select * from users where id = $1'
-      const result = await (await conn).query(sql, [id])
-      ;(await conn).release()
-      return result.rows
-    } catch (err) {
-      throw new Error(`Cannot get this ${id} book  ${err}`)
-    }
+  async authenticate(firstname: string, lastname: string): Promise<User> {
+    const conn = await client.connect()
+    const sql = 'select * from users where first_name=($1) and last_name=($2)'
+
+    const user = await conn.query(sql, [firstname, lastname])
+
+    return user.rows.length ? user.rows[0] : null
   }
 
   async create(u: User): Promise<User[]> {

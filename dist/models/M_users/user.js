@@ -31,11 +31,15 @@ class UserStore {
             throw new Error(`Cannot get this ${id} book  ${err}`);
         }
     }
+    async authenticate(firstname, lastname) {
+        const conn = await connector_1.default.connect();
+        const sql = 'select * from users where first_name=($1) and last_name=($2)';
+        const result = await conn.query(sql, [firstname, lastname]);
+        return result.rows.length ? result.rows[0] : null;
+    }
     async create(u) {
-        console.log("I am activated");
         const salt = process.env.SALT_ROUNDS;
         const pass1 = process.env.BCRYPT_PASSWORD;
-        console.log(pass1, salt);
         const hash = bcrypt_1.default.hashSync(u.password + pass1, parseInt(salt));
         console.log(hash);
         const conn = connector_1.default.connect();
