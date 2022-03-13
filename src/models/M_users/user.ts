@@ -7,7 +7,7 @@ export type User = {
   password: string
 }
 
-class ProductStore {
+class UserStore {
   async index(): Promise<User[]> {
     try {
       const conn = client.connect()
@@ -32,18 +32,33 @@ class ProductStore {
       throw new Error(`Cannot get this ${id} book  ${err}`)
     }
   }
+  async login(id: number): Promise<User[]> {
+    try {
+      const conn = client.connect()
+      const sql = 'select * from users where id = $1'
+      const result = await (await conn).query(sql, [id])
+      ;(await conn).release()
+      return result.rows
+    } catch (err) {
+      throw new Error(`Cannot get this ${id} book  ${err}`)
+    }
+  }
 
-  async create(u: User): Promise<boolean> {
+  async create(u: User): Promise<User[]> {
+    const salt = process.env.SALT_ROUNDS
+    const pass1 = process.env.BCRYPT_PASSWORD as unknown as string
+    const hash = bcrypt.hashSync(u.password + pass1, parseInt(salt as string))
+    console.log(hash)
     const conn = client.connect()
     const sql =
-      'insert into products(first_name,last_name,password) values ($1,$2,$3)  RETURNING *'
+      'insert into users(first_name,last_name,password) values ($1,$2,$3)  RETURNING first_name,last_name'
     const result = await (
       await conn
-    ).query(sql, [u.first_name, u.last_name, u.password])
-    const user: number = result.rowCount
+    ).query(sql, [u.first_name, u.last_name, hash])
+    const user: User[] = result.rows
     ;(await conn).release()
     // eslint-disable-next-line no-constant-condition
-    return true ? user == 1 : false
+    return user
   }
 
   async destroy(id: number): Promise<boolean> {
@@ -61,4 +76,4 @@ class ProductStore {
   }
 }
 
-export default ProductStore
+export default UserStore

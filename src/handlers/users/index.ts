@@ -1,12 +1,18 @@
 import express, { Request, Response } from 'express'
-import { User } from '../../models/M_users/user'
+import UserStore, { User } from '../../models/M_users/user'
+import dotenv from 'dotenv'
 
+import bcrypt from 'bcrypt'
+import jwt from 'jsonwebtoken'
+dotenv.config()
 const index = async (_req: Request, res: Response) => {
-  const users: User[] =[ {
+  const users: User[] = [
+    {
       first_name: 'ahmed',
       last_name: 'ayman',
       password: 'sakdnlsd',
-  }]
+    },
+  ]
   res.json(users)
 }
 const show = async (_req: Request, res: Response) => {
@@ -19,18 +25,18 @@ const show = async (_req: Request, res: Response) => {
 }
 const create = async (req: Request, res: Response) => {
   try {
-    const user = {
-      // - id
-      // - id of each product in the order
-      // - quantity of each product in the order
-      // - user_id
-      // - status of order (active or complete)
+    console.log(req.body)
+    const userStore = new UserStore()
+    const user: User = {
+      first_name: req.body.fname,
+      last_name: req.body.lname,
+      password: req.body.password as unknown as string,
     }
-    const newUser = {} //async call to model
-    res.json(newUser)
+    const newUser = await userStore.create(user) //await call to model
+    const tocken = jwt.sign(newUser[0], process.env.JWT_TOKEN as string)
+    res.json({ j: tocken })
   } catch (err) {
-    res.status(400)
-    res.json(err)
+    res.status(500).json(err)
   }
 }
 
