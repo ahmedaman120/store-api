@@ -27,10 +27,10 @@ const create = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
         res.json(err);
     }
 });
-const destroy = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
-    const deleted = {}; //await store.delete(req.body.id)
-    res.json(deleted);
-});
+// const destroy = async (req: Request, res: Response) => {
+//   const deleted = {} //await store.delete(req.body.id)
+//   res.json(deleted)
+// }
 const getUserOrder = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     const orderStore = new order_1.default();
     console.log(req.params);
@@ -40,7 +40,7 @@ const getUserOrder = (req, res) => __awaiter(void 0, void 0, void 0, function* (
 });
 const order_handler = (app) => {
     app.post('/orders', auth_middleware_1.checkTocken, create);
-    app.delete('/orders', auth_middleware_1.checkTocken, destroy);
+    // app.delete('/orders', checkTocken, destroy)
     app.get('/orders/user/:id', auth_middleware_1.checkTocken, getUserOrder);
 };
 exports.default = order_handler;
