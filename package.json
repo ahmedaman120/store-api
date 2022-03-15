@@ -6,12 +6,14 @@
     "scripts": {
         "start": "node src/server.ts",
         "watch": "tsc-watch --noClear -p ./tsconfig.json --onSuccess \"node ./dist/server.js\"",
-        "test": "jasmine-ts",
+        "test:jasmine": "jasmine-ts",
         "build": "npx tsc",
         "start:server": "nodemon ./dist/server.js",
         "fix:prettier": "prettier --write \"./src/*.ts\"",
         "fix:lint": "eslint  \"./src/**/*.ts\" --fix",
-        "fix:lintjs": "eslint  \"./dist/*.js\" --fix"
+        "fix:lintjs": "eslint  \"./dist/*.js\" --fix",
+        "test": "npm run build && npm run test:jasmine",
+        "test:db": "SET ENV=test && db-migrate --env test up && npm run test && db-migrate --env test down"
     },
     "author": "Udacity",
     "license": "ISC",

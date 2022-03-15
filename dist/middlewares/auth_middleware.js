@@ -10,11 +10,18 @@ const checkTocken = (req, res, next) => {
         const header = req.headers.authorization;
         const token = header ? header.split(' ')[1] : '';
         const userData = jsonwebtoken_1.default.verify(token, process.env.JWT_TOKEN);
-        next(userData);
+        if (userData) {
+            next();
+        }
+        else {
+            res.status(401).json({
+                error: 'please complete your information',
+            });
+        }
     }
     catch (err) {
         res.status(401).json({
-            error: new Error('Invalid request!'),
+            error: 'please complete your information',
         });
     }
 };

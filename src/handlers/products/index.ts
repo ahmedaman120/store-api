@@ -1,6 +1,6 @@
 import express, { Request, Response } from 'express'
 import ProductStore, { Product } from '../../models/M_product/product'
-
+import { checkTocken } from '../../middlewares/auth_middleware'
 
 const index = async (_req: Request, res: Response) => {
   const p = new ProductStore()
@@ -8,10 +8,16 @@ const index = async (_req: Request, res: Response) => {
   res.json(products)
 }
 const show = async (_req: Request, res: Response) => {
+  console.log(_req.params)
   const id: number = _req.params.id as unknown as number
   const p = new ProductStore()
-  const product: Product[] = await p.show(id)
-  res.json(product)
+  try {
+    const product: Product[] = await p.show(id)
+    console.log('test', product)
+    res.json(product)
+  } catch (err) {
+    console.log(err)
+  }
 }
 const create = async (req: Request, res: Response) => {
   try {
@@ -41,9 +47,9 @@ const destroy = async (req: Request, res: Response) => {
 }
 const product_handler = (app: express.Application) => {
   app.get('/products', index)
-  app.get('/products/:id', show)
-  app.post('/products', create)
-  app.delete('/products/:id', destroy)
+  app.get('/products/:id', [checkTocken], show)
+  app.post('/products', checkTocken, create)
+  app.delete('/products/:id', checkTocken, destroy)
 }
 
 export default product_handler

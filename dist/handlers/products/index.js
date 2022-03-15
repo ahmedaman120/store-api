@@ -4,16 +4,24 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 const product_1 = __importDefault(require("../../models/M_product/product"));
+const auth_middleware_1 = require("../../middlewares/auth_middleware");
 const index = async (_req, res) => {
     const p = new product_1.default();
     const products = await p.index();
     res.json(products);
 };
 const show = async (_req, res) => {
+    console.log(_req.params);
     const id = _req.params.id;
     const p = new product_1.default();
-    const product = await p.show(id);
-    res.json(product);
+    try {
+        const product = await p.show(id);
+        console.log('test', product);
+        res.json(product);
+    }
+    catch (err) {
+        console.log(err);
+    }
 };
 const create = async (req, res) => {
     try {
@@ -44,8 +52,8 @@ const destroy = async (req, res) => {
 };
 const product_handler = (app) => {
     app.get('/products', index);
-    app.get('/products/:id', show);
-    app.post('/products', create);
-    app.delete('/products/:id', destroy);
+    app.get('/products/:id', [auth_middleware_1.checkTocken], show);
+    app.post('/products', auth_middleware_1.checkTocken, create);
+    app.delete('/products/:id', auth_middleware_1.checkTocken, destroy);
 };
 exports.default = product_handler;
