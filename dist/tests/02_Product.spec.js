@@ -22,10 +22,10 @@ describe('Check Functions in product model', () => {
     it('Test create function is existance', () => {
         expect(productStore.create).toBeDefined();
     });
-    it('Test create function is existance', () => {
+    it('Test destroy function is existance', () => {
         expect(productStore.destroy).toBeDefined();
     });
-    it('Test create function is existance', () => {
+    it('Test show function is existance', () => {
         expect(productStore.show).toBeDefined();
     });
 });
