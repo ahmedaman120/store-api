@@ -16,7 +16,7 @@ const user_1 = __importDefault(require("../models/M_users/user"));
 const data_1 = require("./data/data");
 const userStore = new user_1.default();
 const token = '';
-describe('Check Functions in user moder', () => {
+describe('Check Functions in user model', () => {
     it('Test index function is existance', () => {
         expect(userStore.index).toBeDefined();
     });
@@ -27,7 +27,7 @@ describe('Check Functions in user moder', () => {
         expect(userStore.authenticate).toBeDefined();
     });
 });
-describe('Check Functions performance', () => {
+describe('Check Functions performance on user Model', () => {
     it('Test create user', () => __awaiter(void 0, void 0, void 0, function* () {
         const user = data_1.users[0];
         try {

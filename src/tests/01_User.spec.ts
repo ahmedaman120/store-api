@@ -3,7 +3,7 @@ import { users } from './data/data'
 
 const userStore = new UserStore()
 const token = ''
-describe('Check Functions in user moder', () => {
+describe('Check Functions in user model', () => {
   it('Test index function is existance', () => {
     expect(userStore.index).toBeDefined()
   })
@@ -15,7 +15,7 @@ describe('Check Functions in user moder', () => {
   })
 })
 
-describe('Check Functions performance', () => {
+describe('Check Functions performance on user Model', () => {
   it('Test create user', async () => {
     const user: User = users[0]
     try {
@@ -67,5 +67,5 @@ describe('Check Functions performance', () => {
     }
   })
 
-  
+
 })
