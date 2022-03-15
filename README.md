@@ -11,6 +11,13 @@ Your application must make use of the following libraries:
 - jasmine from npm for testing
 - cors from npm
 
+## Steps to setup DB Requirments 
+1. conect to psql server with admin privilages
+2. enter this command to create user `CREATE USER full_stack_user WITH PASSWORD 'admin123'; `
+3. enter this command to create production database `CREATE DATABASE store; `
+4. enter this command to create testing database `CREATE DATABASE store_test; `
+
+
 ## Steps to Completion
 1. `yarn add` to install all packages required in project.
 2. configure env file by put your db information and set another db for testing.
