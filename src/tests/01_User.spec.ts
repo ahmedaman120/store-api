@@ -30,4 +30,42 @@ describe('Check Functions performance', () => {
       console.log(error)
     }
   })
+
+  it('Test authenticate the users', async () => {
+    const user: User = users[0]
+    try {
+      const u_json = await userStore.authenticate(
+        user.first_name,
+        user.last_name
+      )
+      expect(
+        JSON.stringify({
+          first_name: u_json.first_name,
+          last_name: u_json.last_name,
+        })
+      ).toEqual(
+        JSON.stringify({
+          first_name: user.first_name,
+          last_name: user.last_name,
+        })
+      )
+    } catch (error) {
+      console.log(error)
+    }
+  })
+
+  it('Test authenticate the user but user not registerd', async () =>{
+    const user: User = users[1]
+    try {
+      const u_json = await userStore.authenticate(
+        user.first_name,
+        user.last_name
+      )
+      expect(u_json).toBeUndefined()
+    } catch (error) {
+      console.log(error)
+    }
+  })
+
+  
 })

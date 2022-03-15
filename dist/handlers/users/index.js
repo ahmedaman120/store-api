@@ -53,7 +53,7 @@ const login = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
         const userStore = new user_1.default();
         const { fname, lname, password } = req.body;
         const authedUser = yield userStore.authenticate(fname, lname);
-        console.log(authedUser);
+        // console.log(authedUser)
         if (authedUser) {
             const result = bcrypt_1.default.compareSync(password + process.env.BCRYPT_PASSWORD, authedUser.password);
             if (result) {

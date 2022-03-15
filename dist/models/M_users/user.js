@@ -49,7 +49,7 @@ class UserStore {
             const conn = yield connector_1.default.connect();
             const sql = 'select * from users where first_name=($1) and last_name=($2)';
             const user = yield conn.query(sql, [firstname, lastname]);
-            return user.rows.length ? user.rows[0] : null;
+            return user.rows.length > 0 ? user.rows[0] : undefined;
         });
     }
     create(u) {

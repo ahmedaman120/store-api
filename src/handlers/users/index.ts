@@ -43,7 +43,7 @@ const login = async (req: Request, res: Response) => {
     const userStore = new UserStore()
     const { fname, lname, password } = req.body
     const authedUser: User = await userStore.authenticate(fname, lname)
-    console.log(authedUser)
+    // console.log(authedUser)
     if (authedUser) {
       const result = bcrypt.compareSync(
         password + process.env.BCRYPT_PASSWORD,

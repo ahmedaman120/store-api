@@ -38,7 +38,7 @@ class UserStore {
 
     const user = await conn.query(sql, [firstname, lastname])
 
-    return user.rows.length ? user.rows[0] : null
+    return user.rows.length > 0 ? user.rows[0] : undefined
   }
 
   async create(u: User): Promise<User[]> {
