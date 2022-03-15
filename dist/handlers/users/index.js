@@ -29,7 +29,6 @@ const show = (_req, res) => __awaiter(void 0, void 0, void 0, function* () {
 });
 const create = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     try {
-        console.log(req.body);
         const userStore = new user_1.default();
         const user = {
             first_name: req.body.fname,
@@ -54,7 +53,7 @@ const login = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
         const { fname, lname, password } = req.body;
         const authedUser = yield userStore.authenticate(fname, lname);
         // console.log(authedUser)
-        if (authedUser) {
+        if (authedUser.password) {
             const result = bcrypt_1.default.compareSync(password + process.env.BCRYPT_PASSWORD, authedUser.password);
             if (result) {
                 authedUser.password = '';
@@ -62,11 +61,11 @@ const login = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
                 res.status(200).send(tocken);
             }
             else {
-                res.status(200).send('the coordinates are wrong');
+                res.status(400).send('the coordinates are wrong');
             }
         }
         else {
-            res.status(200).send('the coordinates are wrong');
+            res.status(500).send('the coordinates are wrong');
         }
     }
     catch (err) {

@@ -15,10 +15,10 @@ const create = async (req: Request, res: Response) => {
   }
 }
 
-const destroy = async (req: Request, res: Response) => {
-  const deleted = {} //await store.delete(req.body.id)
-  res.json(deleted)
-}
+// const destroy = async (req: Request, res: Response) => {
+//   const deleted = {} //await store.delete(req.body.id)
+//   res.json(deleted)
+// }
 const getUserOrder = async (req: Request, res: Response) => {
   const orderStore = new OrderStore()
   console.log(req.params)
@@ -30,7 +30,7 @@ const getUserOrder = async (req: Request, res: Response) => {
 }
 const order_handler = (app: express.Application) => {
   app.post('/orders', checkTocken, create)
-  app.delete('/orders', checkTocken, destroy)
+  // app.delete('/orders', checkTocken, destroy)
   app.get('/orders/user/:id', checkTocken, getUserOrder)
 }
 

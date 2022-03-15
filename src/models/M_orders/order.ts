@@ -22,13 +22,6 @@ class OrderStore {
           "select * from orders_products where user_id=$1 and status='active'"
         const customerActiveOrder = (await db).query(sqlOrder, [user.id])
         const customerOrder = (await customerActiveOrder).rows
-        //get product name
-        // for (let i = 0; i < customerOrder.length; i++) {
-        //   const product_id = customerOrder[i].product_id
-        //   const sqlGetProductName = 'select name from products where id=$1'
-        //   const res = (await (await db).query(sqlGetProductName, [product_id])).rows
-        //   customerOrder[i]['product_name'] = res[0].name
-        // }
         ;(await db).release()
         const userOrder = { userInfo: user.id, order: customerOrder }
         console.log(userOrder)

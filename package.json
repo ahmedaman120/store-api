@@ -12,7 +12,7 @@
         "fix:prettier": "prettier --write \"./src/*.ts\"",
         "fix:lint": "eslint  \"./src/**/*.ts\" --fix",
         "fix:lintjs": "eslint  \"./dist/*.js\" --fix",
-        "test:env": "SET ENV=test && db-migrate --env test down && db-migrate --env test up && npm run build && npm run test:jasmine && db-migrate --env test down"
+        "test:env": "SET ENV=test && db-migrate --env test up && npm run build && npm run test:jasmine && db-migrate --env test reset"
     },
     "author": "Udacity",
     "license": "ISC",

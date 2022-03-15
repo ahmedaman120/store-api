@@ -1,27 +1,25 @@
 import ProductStore, { Product } from '../models/M_product/product'
 import { products } from './data/data'
 
-const  productStore = new ProductStore()
-
+const productStore = new ProductStore()
 
 describe('Check Functions in product model', () => {
   it('Test index function is existance', () => {
-    expect( productStore.index).toBeDefined()
+    expect(productStore.index).toBeDefined()
   })
   it('Test create function is existance', () => {
-    expect( productStore.create).toBeDefined()
+    expect(productStore.create).toBeDefined()
   })
   it('Test destroy function is existance', () => {
-    expect( productStore.destroy).toBeDefined()
+    expect(productStore.destroy).toBeDefined()
   })
   it('Test show function is existance', () => {
-    expect( productStore.show).toBeDefined()
+    expect(productStore.show).toBeDefined()
   })
 })
 
 describe('Check Functions performance on product Model', () => {
-  
-   it('Test create product' , async () => {
+  it('Test create product', async () => {
     const product: Product = products[0]
     try {
       const p_json = await productStore.create(product)
@@ -33,5 +31,5 @@ describe('Check Functions performance on product Model', () => {
     } catch (error) {
       console.log(error)
     }
-   })
+  })
 })

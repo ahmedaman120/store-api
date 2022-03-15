@@ -54,7 +54,7 @@ describe('Check Functions performance on user Model', () => {
     }
   })
 
-  it('Test authenticate the user but user not registerd', async () =>{
+  it('Test authenticate the user but user not registerd', async () => {
     const user: User = users[1]
     try {
       const u_json = await userStore.authenticate(
@@ -66,6 +66,4 @@ describe('Check Functions performance on user Model', () => {
       console.log(error)
     }
   })
-
-
 })

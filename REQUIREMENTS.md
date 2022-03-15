@@ -9,17 +9,27 @@ These are the notes from a meeting with the frontend developer that describe wha
 |------|-----|--------------|
 | index(GET) | /products | this endpoint list all products |
 | show(GET) | /products/:id | this endpoint list one product|
-| create(POST) | /products | this endpoint accept headers authorization to check the user and then get body to save on product|
-| destroy(DELETE) | /products/:id | this endpoint accept headers authorization to check the user and then get body to save on product|
+| create(POST) Token required| /products | this endpoint accept headers authorization to check the user and then get body to save on product|
+| destroy(DELETE) Token required| /products/:id | this endpoint accept headers authorization to check the user and then get body to save on product|
 
 #### Users
-- Index [token required]
-- Show [token required]
-- Create N[token required]
+| Name | URL |  Description|
+|------|-----|--------------|
+| index(GET) | /users | this endpoint list all users |
+| show(GET) Token required| /users/:id | this endpoint list one users|
+| create(POST) | /users | this endpoint accept headers authorization to check the user and then get body to save on product|
+| destroy(DELETE) Token required| /users/:id | this endpoint accept headers authorization to check the user and then delete user by id params|
+| login(POST) | /users/login | this endpoint check if user is verified or not and give token by send this on body {fname:string,lname:string,password:string} |
+
+
 
 #### Orders
-- Current Order by user (args: user id)[token required]
-- [OPTIONAL] Completed Orders by user (args: user id)[token required]
+| Name | URL |  Description|
+|------|-----|--------------|
+| Orders(POST)  Token required| /orders | this endpoint accept json with this format   {user_id:number,items: [{product_id: number,status: string,quantity: number}, ] } |
+| UserOrder(GET)  Token required| /orders/user/:id | this endpoint list all products that user orderd|
+
+
 
 ## Data Shapes
 #### Product

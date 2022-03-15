@@ -18,7 +18,6 @@ const show = async (_req: Request, res: Response) => {
 }
 const create = async (req: Request, res: Response) => {
   try {
-    console.log(req.body)
     const userStore = new UserStore()
     const user: User = {
       first_name: req.body.fname,
@@ -44,7 +43,7 @@ const login = async (req: Request, res: Response) => {
     const { fname, lname, password } = req.body
     const authedUser: User = await userStore.authenticate(fname, lname)
     // console.log(authedUser)
-    if (authedUser) {
+    if (authedUser.password) {
       const result = bcrypt.compareSync(
         password + process.env.BCRYPT_PASSWORD,
         authedUser.password
@@ -58,10 +57,10 @@ const login = async (req: Request, res: Response) => {
         )
         res.status(200).send(tocken)
       } else {
-        res.status(200).send('the coordinates are wrong')
+        res.status(400).send('the coordinates are wrong')
       }
     } else {
-      res.status(200).send('the coordinates are wrong')
+      res.status(500).send('the coordinates are wrong')
     }
   } catch (err) {
     res.status(500).json(err)
