@@ -34,8 +34,8 @@ class UserStore {
     async authenticate(firstname, lastname) {
         const conn = await connector_1.default.connect();
         const sql = 'select * from users where first_name=($1) and last_name=($2)';
-        const result = await conn.query(sql, [firstname, lastname]);
-        return result.rows.length ? result.rows[0] : null;
+        const user = await conn.query(sql, [firstname, lastname]);
+        return user.rows.length ? user.rows[0] : null;
     }
     async create(u) {
         const salt = process.env.SALT_ROUNDS;

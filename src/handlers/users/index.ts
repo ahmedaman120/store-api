@@ -6,21 +6,12 @@ import bcrypt from 'bcrypt'
 import jwt from 'jsonwebtoken'
 dotenv.config()
 const index = async (_req: Request, res: Response) => {
-  const users: User[] = [
-    {
-      first_name: 'ahmed',
-      last_name: 'ayman',
-      password: 'sakdnlsd',
-    },
-  ]
+  const userStore = new UserStore()
+  const users = userStore.index()
   res.json(users)
 }
 const show = async (_req: Request, res: Response) => {
-  const user: User = {
-    first_name: 'ahmed',
-    last_name: 'ayman',
-    password: 'sakdnlsd',
-  }
+  const user = new UserStore().show(_req.params.id as unknown as number)
   res.json(user)
 }
 const create = async (req: Request, res: Response) => {
@@ -41,8 +32,8 @@ const create = async (req: Request, res: Response) => {
 }
 
 const destroy = async (req: Request, res: Response) => {
-  const deleted = {} //await store.delete(req.body.id)
-  res.json(deleted)
+  const deleted = new UserStore().destroy(req.body.id) //await store.delete(req.body.id)
+  res.json({ deleted: deleted, flag: 'delete' })
 }
 
 const login = async (req: Request, res: Response) => {

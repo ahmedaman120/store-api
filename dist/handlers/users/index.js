@@ -9,21 +9,12 @@ const bcrypt_1 = __importDefault(require("bcrypt"));
 const jsonwebtoken_1 = __importDefault(require("jsonwebtoken"));
 dotenv_1.default.config();
 const index = async (_req, res) => {
-    const users = [
-        {
-            first_name: 'ahmed',
-            last_name: 'ayman',
-            password: 'sakdnlsd',
-        },
-    ];
+    const userStore = new user_1.default();
+    const users = userStore.index();
     res.json(users);
 };
 const show = async (_req, res) => {
-    const user = {
-        first_name: 'ahmed',
-        last_name: 'ayman',
-        password: 'sakdnlsd',
-    };
+    const user = new user_1.default().show(_req.params.id);
     res.json(user);
 };
 const create = async (req, res) => {
@@ -44,8 +35,8 @@ const create = async (req, res) => {
     }
 };
 const destroy = async (req, res) => {
-    const deleted = {}; //await store.delete(req.body.id)
-    res.json(deleted);
+    const deleted = new user_1.default().destroy(req.body.id); //await store.delete(req.body.id)
+    res.json({ deleted: deleted, flag: 'delete' });
 };
 const login = async (req, res) => {
     try {
