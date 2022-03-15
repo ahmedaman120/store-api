@@ -1,4 +1,5 @@
 import express, { Request, Response } from 'express'
+import { checkTocken } from '../../middlewares/auth_middleware'
 import OrderStore, { OrderReq } from '../../models/M_orders/order'
 
 const create = async (req: Request, res: Response) => {
@@ -28,9 +29,9 @@ const getUserOrder = async (req: Request, res: Response) => {
   })
 }
 const order_handler = (app: express.Application) => {
-  app.post('/orders', create)
-  app.delete('/orders', destroy)
-  app.get('/orders/user/:id', getUserOrder)
+  app.post('/orders', checkTocken, create)
+  app.delete('/orders', checkTocken, destroy)
+  app.get('/orders/user/:id', checkTocken, getUserOrder)
 }
 
 export default order_handler

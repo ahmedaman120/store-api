@@ -10,7 +10,6 @@ export type OrderReq = {
   items: Order[]
 }
 class OrderStore {
-  
   async getCurrentOrder(userId: number): Promise<any> {
     try {
       const db = client.connect()

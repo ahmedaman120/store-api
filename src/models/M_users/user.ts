@@ -45,7 +45,6 @@ class UserStore {
     const salt = process.env.SALT_ROUNDS
     const pass1 = process.env.BCRYPT_PASSWORD as unknown as string
     const hash = bcrypt.hashSync(u.password + pass1, parseInt(salt as string))
-    console.log(hash)
     const conn = client.connect()
     const sql =
       'insert into users(first_name,last_name,password) values ($1,$2,$3)  RETURNING first_name,last_name'

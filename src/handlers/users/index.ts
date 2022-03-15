@@ -4,6 +4,8 @@ import dotenv from 'dotenv'
 
 import bcrypt from 'bcrypt'
 import jwt from 'jsonwebtoken'
+import { checkTocken } from '../../middlewares/auth_middleware'
+
 dotenv.config()
 const index = async (_req: Request, res: Response) => {
   const userStore = new UserStore()
@@ -66,11 +68,11 @@ const login = async (req: Request, res: Response) => {
   }
 }
 const user_handler = (app: express.Application) => {
-  app.get('/users', index)
-  app.get('/users/:id', show)
+  app.get('/users', checkTocken, index)
+  app.get('/users/:id', checkTocken, show)
   app.post('/users', create)
   app.post('/users/login', login)
-  app.delete('/users', destroy)
+  app.delete('/users', checkTocken, destroy)
 }
 
 export default user_handler
