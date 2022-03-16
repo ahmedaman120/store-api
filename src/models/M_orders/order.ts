@@ -58,6 +58,7 @@ class OrderStore {
       }
       return allOrder
     } catch (err) {
+      // console.log(err)
       throw new Error(`Cannot add this order`)
     }
   }

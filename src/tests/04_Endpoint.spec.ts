@@ -1,6 +1,29 @@
 import request from 'supertest'
 import app from '../server'
+import UserStore, { User } from '../models/M_users/user'
 import { users, products } from './data/data'
+import ProductStore from '../models/M_product/product'
+import OrderStore from '../models/M_orders/order'
+
+let user: User
+let accessToken: string
+
+const userModel = new UserStore()
+const productModel = new ProductStore()
+const orderModel = new OrderStore()
+
+beforeAll(async () => {
+  const req = request(app)
+  const res = await req.post('/users').send({
+    fname: 'test1',
+    lname: 'test',
+    password: 'test',
+  })
+
+  user = res.body.user
+  accessToken = res.body.j
+  console.log(accessToken)
+})
 
 describe('Test User authentication and verification', () => {
   it('test sign up user by use /users with post request', async () => {
@@ -79,7 +102,7 @@ describe('Test User authentication and verification', () => {
     const token = res.text
     const response = await req
       .get('/users/1')
-      .set('Authorization', 'Bearer ' + token+'as')
+      .set('Authorization', 'Bearer ' + token + 'as')
     expect(response.status == 401).toBeTruthy()
   })
 })

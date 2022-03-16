@@ -1,6 +1,6 @@
 import { User } from '../../models/M_users/user'
 import { Product } from '../../models/M_product/product'
-import { Order } from '../../models/M_orders/order'
+import { Order, OrderReq } from '../../models/M_orders/order'
 
 export const users: User[] = [
   {
@@ -41,5 +41,36 @@ export const products: Product[] = [
   {
     name: 'bag',
     price: 30,
+  },
+]
+
+export const order: OrderReq[] = [
+  {
+    user_id: 1,
+    status: 'active',
+    items: [
+      {
+        product_id: 2,
+        quantity: 3,
+      },
+      {
+        product_id: 1,
+        quantity: 3,
+      },
+    ],
+  },
+  {
+    user_id: 5,
+    status: 'active',
+    items: [
+      {
+        product_id: 100,
+        quantity: 3,
+      },
+      {
+        product_id: 15,
+        quantity: 3,
+      },
+    ],
   },
 ]

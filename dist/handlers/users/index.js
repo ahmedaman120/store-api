@@ -16,6 +16,7 @@ const user_1 = __importDefault(require("../../models/M_users/user"));
 const dotenv_1 = __importDefault(require("dotenv"));
 const bcrypt_1 = __importDefault(require("bcrypt"));
 const jsonwebtoken_1 = __importDefault(require("jsonwebtoken"));
+const auth_middleware_1 = require("../../middlewares/auth_middleware");
 dotenv_1.default.config();
 const index = (_req, res) => __awaiter(void 0, void 0, void 0, function* () {
     const userStore = new user_1.default();
@@ -73,10 +74,10 @@ const login = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     }
 });
 const user_handler = (app) => {
-    app.get('/users', index);
-    app.get('/users/:id', show);
+    app.get('/users', auth_middleware_1.checkTocken, index);
+    app.get('/users/:id', auth_middleware_1.checkTocken, show);
     app.post('/users', create);
     app.post('/users/login', login);
-    app.delete('/users', destroy);
+    app.delete('/users', auth_middleware_1.checkTocken, destroy);
 };
 exports.default = user_handler;

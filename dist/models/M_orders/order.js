@@ -21,7 +21,7 @@ class OrderStore {
                 const sql = 'select * from users where id=$1';
                 const res = (yield db).query(sql, [userId]);
                 const user = (yield res).rows[0];
-                console.log(user);
+                // console.log(user)
                 if (user.id) {
                     const sqlOrder = "SELECT order_id , product_id, p.name, quantity  FROM orders as o \
           JOIN products_orders as po ON ord_id=order_id JOIN products \
@@ -30,7 +30,7 @@ class OrderStore {
                     const customerOrder = (yield customerActiveOrder).rows;
                     (yield db).release();
                     const userOrder = { userInfo: user.id, order: customerOrder };
-                    console.log(userOrder);
+                    // console.log(userOrder)
                     return userOrder;
                 }
             }
@@ -63,6 +63,7 @@ class OrderStore {
                 return allOrder;
             }
             catch (err) {
+                // console.log(err)
                 throw new Error(`Cannot add this order`);
             }
         });

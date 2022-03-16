@@ -23,7 +23,6 @@ const create = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     }
     catch (err) {
         res.status(400);
-        console.log(err);
         res.json(err);
     }
 });

@@ -4,4 +4,5 @@ CREATE TABLE IF NOT EXISTS users(
     first_name varchar(40),
     last_name varchar(40),
     password text
-)
+);
+ALTER SEQUENCE users_id_seq RESTART WITH 1;
