@@ -10,6 +10,18 @@ Your application must make use of the following libraries:
 - jsonwebtoken from npm for working with JWTs
 - jasmine from npm for testing
 - cors from npm
+- create .env file to main directory 
+```bash
+POSTGRES_HOST=127.0.0.1
+POSTGRES_USER=full_stack_user
+POSTGRES_PASSWORD=admin123
+POSTGRES_DB=store
+ENV=prod
+POSTGRES_TESTDB=store_test
+BCRYPT_PASSWORD=anything
+SALT_ROUNDS=10
+JWT_TOKEN=eBn(WHtS#'kBE+u}IWcjEx<x=
+```
 
 ## Steps to setup DB Requirments 
 1. conect to psql server with admin privilages `psql -U postgres -h 127.0.0.1 -p 5432` then enter your server password
