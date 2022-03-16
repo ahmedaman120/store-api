@@ -14,8 +14,10 @@ Your application must make use of the following libraries:
 ## Steps to setup DB Requirments 
 1. conect to psql server with admin privilages `psql -U postgres -h 127.0.0.1 -p 5432` then enter your server password
 2. enter this command to create user `CREATE USER full_stack_user WITH PASSWORD 'admin123'; `
-3. enter this command to create production database `CREATE DATABASE store; `
-4. enter this command to create testing database `CREATE DATABASE store_test; `
+4. enter this command to create production database `CREATE DATABASE store; `
+5. enter this command to create testing database `CREATE DATABASE store_test; `
+6. enter this command to create user `GRANT ALL PRIVILEGES ON DATABASE store TO full_stack_user; `
+7. enter this command to create user `GRANT ALL PRIVILEGES ON DATABASE store_test TO full_stack_user; `
 
 
 ## Steps to Completion
