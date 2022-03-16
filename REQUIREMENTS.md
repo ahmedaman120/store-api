@@ -32,7 +32,7 @@ These are the notes from a meeting with the frontend developer that describe wha
 
 
 ## Data Shapes
-#### Product
+#### products
 | Column |         Type          | Collation |
 --------+-----------------------+-----------+
 | id     | integer               |           |
@@ -41,7 +41,7 @@ These are the notes from a meeting with the frontend developer that describe wha
 
 - TABLE SCHEMA  `CREATE TABLE IF NOT EXISTS products(id SERIAL PRIMARY KEY,name varchar(40),price NUMERIC(5,2))`
 
-#### User
+#### users
 |   Column   |         Type          | Collation | Nullable |
 ------------+-----------------------+-----------+----------+
 | id         | integer               |           | not null | 
@@ -51,7 +51,7 @@ These are the notes from a meeting with the frontend developer that describe wha
 - TABLE SCHEMA  `CREATE TABLE IF NOT EXISTS users(id SERIAL PRIMARY KEY,first_name varchar(40),last_name varchar(40),password text)`
 
 
-#### Orders
+####  orders_products
    Column   |    Type     | Collation | Nullable |
 ------------+-------------+-----------+----------+
  id         | integer     |           | not null |
