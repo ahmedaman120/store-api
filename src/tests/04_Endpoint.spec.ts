@@ -81,28 +81,16 @@ describe('Test User authentication and verification', () => {
 
   it('test show user by use /users/:id with get request to check jwt check', async () => {
     const req = request(app)
-    const res = await req.post('/users/login').send({
-      fname: users[2].first_name,
-      lname: users[2].last_name,
-      password: users[2].password,
-    })
-    const token = res.text
     const response = await req
       .get('/users/1')
-      .set('Authorization', 'Bearer ' + token)
+      .set('Authorization', 'Bearer ' + accessToken)
     expect(response.status == 200).toBeTruthy()
   })
   it('test show user by use /users/:id with get request to check jwt wrong check', async () => {
     const req = request(app)
-    const res = await req.post('/users/login').send({
-      fname: users[2].first_name,
-      lname: users[2].last_name,
-      password: users[2].password,
-    })
-    const token = res.text
     const response = await req
       .get('/users/1')
-      .set('Authorization', 'Bearer ' + token + 'as')
+      .set('Authorization', 'Bearer ' + accessToken + 'as')
     expect(response.status == 401).toBeTruthy()
   })
 })
