@@ -58,6 +58,7 @@ These are the notes from a meeting with the frontend developer that describe wha
 | user_id    | integer     |           |          |
 | status     | status_code |           |          |
 | quantity   | integer     |           | not null |
+
 -TYPES IN SCHEMA `CREATE TYPE  status_code AS ENUM('active','complete');`
 - TABLE SCHEMA  `CREATE TABLE orders_products (ord_id SERIAL PRIMARY KEY,user_id int REFERENCES users(id) ON DELETE CASCAD,status status_code,quantity integer NOT NULL);`
 
