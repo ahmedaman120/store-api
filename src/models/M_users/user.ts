@@ -60,7 +60,7 @@ class UserStore {
   async destroy(id: number): Promise<boolean> {
     try {
       const conn = client.connect()
-      const sql = 'DELETE FROM user WHERE id= $1 RETURNING *'
+      const sql = 'DELETE FROM users WHERE id= $1 RETURNING *'
       const result = await (await conn).query(sql, [id])
       const user: number = result.rowCount
       ;(await conn).release()

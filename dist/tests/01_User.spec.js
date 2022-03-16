@@ -77,7 +77,7 @@ describe('Check Functions performance on user Model', () => {
         }
     }));
     it('test list get specific user with id 2', () => __awaiter(void 0, void 0, void 0, function* () {
-        const user = data_1.users[0];
+        const user = data_1.users[3];
         try {
             const u_json = yield userStore.show(2);
             expect(JSON.stringify({
@@ -87,16 +87,6 @@ describe('Check Functions performance on user Model', () => {
                 first_name: user.first_name,
                 last_name: user.last_name,
             }));
-        }
-        catch (error) {
-            console.log(error);
-        }
-    }));
-    it('test destroy user with id 2', () => __awaiter(void 0, void 0, void 0, function* () {
-        const user = data_1.users[0];
-        try {
-            const res = yield userStore.destroy(2);
-            expect(res).toEqual(true);
         }
         catch (error) {
             console.log(error);

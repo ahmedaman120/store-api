@@ -14,14 +14,25 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 Object.defineProperty(exports, "__esModule", { value: true });
 const order_1 = __importDefault(require("../models/M_orders/order"));
 const product_1 = __importDefault(require("../models/M_product/product"));
+const user_1 = __importDefault(require("../models/M_users/user"));
 const data_1 = require("./data/data");
 const orderStore = new order_1.default();
 const productStore = new product_1.default();
+const userStore = new user_1.default();
 let created_ord;
 beforeAll(() => __awaiter(void 0, void 0, void 0, function* () {
-    const product = data_1.products[1];
+    const product1 = data_1.products[0];
+    const product2 = data_1.products[1];
     try {
-        const p_json = yield productStore.create(product);
+        yield productStore.create(product1);
+        yield productStore.create(product2);
+        //add user test
+        const user = yield userStore.create({
+            first_name: 'test1',
+            last_name: 'test',
+            password: 'test',
+        });
+        const product = data_1.products[0];
         const ord = data_1.order[0];
         const orderStore = new order_1.default();
         created_ord = yield orderStore.create(ord);

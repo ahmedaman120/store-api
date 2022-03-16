@@ -42,4 +42,28 @@ describe('Check Functions performance on product Model', () => {
             console.log(error);
         }
     }));
+    it('Test create another product', () => __awaiter(void 0, void 0, void 0, function* () {
+        const product = data_1.products[3];
+        try {
+            const p_json = yield productStore.create(product);
+            expect(JSON.stringify({ name: p_json[0].name })).toEqual(JSON.stringify({
+                name: product.name,
+            }));
+        }
+        catch (error) {
+            console.log(error);
+        }
+    }));
+    it('test show product', () => __awaiter(void 0, void 0, void 0, function* () {
+        const product = data_1.products[1];
+        try {
+            const p_json = yield productStore.show(2);
+            expect(JSON.stringify({ name: p_json[0].name })).toEqual(JSON.stringify({
+                name: product.name,
+            }));
+        }
+        catch (error) {
+            console.log(error);
+        }
+    }));
 });

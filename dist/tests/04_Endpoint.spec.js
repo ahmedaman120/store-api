@@ -18,21 +18,20 @@ const user_1 = __importDefault(require("../models/M_users/user"));
 const data_1 = require("./data/data");
 const product_1 = __importDefault(require("../models/M_product/product"));
 const order_1 = __importDefault(require("../models/M_orders/order"));
-let user;
 let accessToken;
 const userModel = new user_1.default();
 const productModel = new product_1.default();
 const orderModel = new order_1.default();
 beforeAll(() => __awaiter(void 0, void 0, void 0, function* () {
     const req = (0, supertest_1.default)(server_1.default);
-    const res = yield req.post('/users').send({
+    const res = yield req.post('/users/login').send({
         fname: 'test1',
         lname: 'test',
         password: 'test',
     });
-    user = res.body.user;
-    accessToken = res.body.j;
-    console.log(accessToken);
+    // user = res.body.user
+    accessToken = res.text;
+    // console.log(accessToken)
 }));
 describe('Test User authentication and verification', () => {
     it('test sign up user by use /users with post request', () => __awaiter(void 0, void 0, void 0, function* () {

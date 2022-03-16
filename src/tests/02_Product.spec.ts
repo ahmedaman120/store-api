@@ -32,4 +32,31 @@ describe('Check Functions performance on product Model', () => {
       console.log(error)
     }
   })
+
+  it('Test create another product', async () => {
+    const product: Product = products[3]
+    try {
+      const p_json = await productStore.create(product)
+      expect(JSON.stringify({ name: p_json[0].name })).toEqual(
+        JSON.stringify({
+          name: product.name,
+        })
+      )
+    } catch (error) {
+      console.log(error)
+    }
+  })
+  it('test show product',  async () => {
+    const product: Product = products[1]
+    try {
+      const p_json = await productStore.show(2)
+      expect(JSON.stringify({ name: p_json[0].name })).toEqual(
+        JSON.stringify({
+          name: product.name,
+        })
+      )
+    } catch (error) {
+      console.log(error)
+    }
+  })
 })

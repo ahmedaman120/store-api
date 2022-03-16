@@ -70,7 +70,7 @@ class UserStore {
         return __awaiter(this, void 0, void 0, function* () {
             try {
                 const conn = connector_1.default.connect();
-                const sql = 'DELETE FROM user WHERE id= $1 RETURNING *';
+                const sql = 'DELETE FROM users WHERE id= $1 RETURNING *';
                 const result = yield (yield conn).query(sql, [id]);
                 const user = result.rowCount;
                 (yield conn).release();
