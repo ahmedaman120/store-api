@@ -66,4 +66,42 @@ describe('Check Functions performance on user Model', () => {
       console.log(error)
     }
   })
+
+  it('test list all users', async () => {
+    try {
+      const users = await userStore.index()
+      expect(users instanceof Array && users.length > 0).toBeTruthy()
+    } catch (err) {
+      console.error(err)
+    }
+  })
+  it('test list get specific user with id 2', async () => {
+    const user: User = users[0]
+    try {
+      const u_json = await userStore.show(2)
+      expect(
+        JSON.stringify({
+          first_name: u_json[0].first_name,
+          last_name: u_json[0].last_name,
+        })
+      ).toEqual(
+        JSON.stringify({
+          first_name: user.first_name,
+          last_name: user.last_name,
+        })
+      )
+    } catch (error) {
+      console.log(error)
+    }
+  })
+
+  it('test destroy user with id 2',  async () => {
+    const user: User = users[0]
+    try {
+      const res = await userStore.destroy(2)
+      expect(res).toEqual(true)
+    } catch (error) {
+      console.log(error)
+    }
+  })
 })

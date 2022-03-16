@@ -67,4 +67,39 @@ describe('Check Functions performance on user Model', () => {
             console.log(error);
         }
     }));
+    it('test list all users', () => __awaiter(void 0, void 0, void 0, function* () {
+        try {
+            const users = yield userStore.index();
+            expect(users instanceof Array && users.length > 0).toBeTruthy();
+        }
+        catch (err) {
+            console.error(err);
+        }
+    }));
+    it('test list get specific user with id 2', () => __awaiter(void 0, void 0, void 0, function* () {
+        const user = data_1.users[0];
+        try {
+            const u_json = yield userStore.show(2);
+            expect(JSON.stringify({
+                first_name: u_json[0].first_name,
+                last_name: u_json[0].last_name,
+            })).toEqual(JSON.stringify({
+                first_name: user.first_name,
+                last_name: user.last_name,
+            }));
+        }
+        catch (error) {
+            console.log(error);
+        }
+    }));
+    it('test destroy user with id 2', () => __awaiter(void 0, void 0, void 0, function* () {
+        const user = data_1.users[0];
+        try {
+            const res = yield userStore.destroy(2);
+            expect(res).toEqual(true);
+        }
+        catch (error) {
+            console.log(error);
+        }
+    }));
 });

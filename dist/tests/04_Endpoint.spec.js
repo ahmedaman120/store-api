@@ -89,15 +89,9 @@ describe('Test User authentication and verification', () => {
     }));
     it('test show user by use /users/:id with get request to check jwt wrong check', () => __awaiter(void 0, void 0, void 0, function* () {
         const req = (0, supertest_1.default)(server_1.default);
-        const res = yield req.post('/users/login').send({
-            fname: data_1.users[2].first_name,
-            lname: data_1.users[2].last_name,
-            password: data_1.users[2].password,
-        });
-        const token = res.text;
         const response = yield req
             .get('/users/1')
-            .set('Authorization', 'Bearer ' + token + 'as');
+            .set('Authorization', 'Bearer ' + accessToken + 'as');
         expect(response.status == 401).toBeTruthy();
     }));
 });
