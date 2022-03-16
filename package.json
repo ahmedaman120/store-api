@@ -14,7 +14,7 @@
         "fix:lintjs": "eslint  \"./dist/*.js\" --fix",
         "test:env": "SET ENV=test && db-migrate --env test up && npm run build && npm run test:jasmine && db-migrate --env test reset"
     },
-    "author": "Udacity",
+    "author": "Ahmed Ayman",
     "license": "ISC",
     "dependencies": {
         "bcrypt": "^5.0.1",
