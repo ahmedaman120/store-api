@@ -3,7 +3,7 @@
 
 ## Required Technologies
 Your application must make use of the following libraries:
-- Postgres for the database
+- Postgres for the database 
 - Node/Express for the application logic
 - dotenv from npm for managing environment variables
 - db-migrate from npm for migrations
@@ -12,7 +12,7 @@ Your application must make use of the following libraries:
 - cors from npm
 
 ## Steps to setup DB Requirments 
-1. conect to psql server with admin privilages
+1. conect to psql server with admin privilages `psql -U postgres -h 127.0.0.1 -p 5432` then enter your server password
 2. enter this command to create user `CREATE USER full_stack_user WITH PASSWORD 'admin123'; `
 3. enter this command to create production database `CREATE DATABASE store; `
 4. enter this command to create testing database `CREATE DATABASE store_test; `
