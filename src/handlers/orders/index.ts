@@ -10,7 +10,6 @@ const create = async (req: Request, res: Response) => {
     res.json(retOrder)
   } catch (err) {
     res.status(400)
-    console.log(err)
     res.json(err)
   }
 }
@@ -20,13 +19,17 @@ const create = async (req: Request, res: Response) => {
 //   res.json(deleted)
 // }
 const getUserOrder = async (req: Request, res: Response) => {
-  const orderStore = new OrderStore()
-  console.log(req.params)
-  res.json({
-    response: await orderStore.getCurrentOrder(
-      req.params.id as unknown as number
-    ),
-  })
+  try {
+    const orderStore = new OrderStore()
+    res.json({
+      response: await orderStore.getCurrentOrder(
+        req.params.id as unknown as number
+      ),
+    })
+  } catch (error) {
+    res.status(400)
+    res.json(err)
+  }
 }
 const order_handler = (app: express.Application) => {
   app.post('/orders', checkTocken, create)
