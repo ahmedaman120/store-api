@@ -9,12 +9,13 @@ import { checkTocken } from '../../middlewares/auth_middleware'
 dotenv.config()
 const index = async (_req: Request, res: Response) => {
   const userStore = new UserStore()
-  const users = userStore.index()
+  const users = await userStore.index()
   res.json(users)
 }
 const show = async (_req: Request, res: Response) => {
-  const user = new UserStore().show(_req.params.id as unknown as number)
-  res.json(user)
+  const user = new UserStore()
+  const result =  await user.show(_req.params.id as unknown as number)
+  res.json(result)
 }
 const create = async (req: Request, res: Response) => {
   try {

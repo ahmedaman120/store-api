@@ -33,21 +33,33 @@ These are the notes from a meeting with the frontend developer that describe wha
 
 ## Data Shapes
 #### Product
--  id
-- name
-- price
-- [OPTIONAL] category
+| Column |         Type          | Collation |
+--------+-----------------------+-----------+
+| id     | integer               |           |
+| name   | character varying(40) |           |
+| price  | numeric(5,2)          |           |
+
+- TABLE SCHEMA  `CREATE TABLE IF NOT EXISTS products(id SERIAL PRIMARY KEY,name varchar(40),price NUMERIC(5,2))`
 
 #### User
-- id
-- firstName
-- lastName
-- password
+|   Column   |         Type          | Collation | Nullable |
+------------+-----------------------+-----------+----------+
+| id         | integer               |           | not null | 
+| first_name | character varying(40) |           |          |  
+| last_name  | character varying(40) |           |          |  
+| password   | text                  |           |          | 
+- TABLE SCHEMA  `CREATE TABLE IF NOT EXISTS users(id SERIAL PRIMARY KEY,first_name varchar(40),last_name varchar(40),password text)`
+
 
 #### Orders
-- id
-- id of each product in the order
-- quantity of each product in the order
-- user_id
-- status of order (active or complete)
+   Column   |    Type     | Collation | Nullable |
+------------+-------------+-----------+----------+
+ id         | integer     |           | not null |
+ user_id    | integer     |           |          |
+ product_id | integer     |           |          |
+ status     | status_code |           |          |
+ quantity   | integer     |           | not null |
+-TYPES IN SCHEMA `CREATE TYPE  status_code AS ENUM('active','complete');`
+- TABLE SCHEMA  `CREATE TABLE orders_products (id SERIAL PRIMARY KEY,user_id int REFERENCES users(id) ON DELETE CASCADE,product_id int REFERENCES products(id) ON DELETE CASCADE,status status_code,quantity integer NOT NULL);`
+
 

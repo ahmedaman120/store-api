@@ -3,9 +3,14 @@ import ProductStore, { Product } from '../../models/M_product/product'
 import { checkTocken } from '../../middlewares/auth_middleware'
 
 const index = async (_req: Request, res: Response) => {
-  const p = new ProductStore()
-  const products: Product[] = await p.index()
-  res.json(products)
+  try {
+    const p = new ProductStore()
+    const products: Product[] = await p.index()
+    res.json(products)
+  } catch(err){
+    res.status(400)
+    res.json(`bad request`)
+  }
 }
 const show = async (_req: Request, res: Response) => {
   console.log(_req.params)
