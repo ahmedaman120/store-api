@@ -28,7 +28,7 @@ const getUserOrder = async (req: Request, res: Response) => {
     })
   } catch (error) {
     res.status(400)
-    res.json(err)
+    res.json(error)
   }
 }
 const order_handler = (app: express.Application) => {

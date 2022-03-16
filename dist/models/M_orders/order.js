@@ -23,7 +23,9 @@ class OrderStore {
                 const user = (yield res).rows[0];
                 console.log(user);
                 if (user.id) {
-                    const sqlOrder = "select * from orders_products where user_id=$1 and status='active'";
+                    const sqlOrder = "SELECT order_id , product_id, p.name, quantity  FROM orders as o \
+          JOIN products_orders as po ON ord_id=order_id JOIN products \
+          as p on p.id=po.product_id   WHERE status='active' and o.user_id= $1;";
                     const customerActiveOrder = (yield db).query(sqlOrder, [user.id]);
                     const customerOrder = (yield customerActiveOrder).rows;
                     (yield db).release();
@@ -42,17 +44,19 @@ class OrderStore {
             try {
                 const db = connector_1.default.connect();
                 const user_id = cart.user_id;
-                const sql = 'INSERT INTO orders_products(user_id,product_id,quantity,status) VALUES($1,$2,$3,$4)  RETURNING *';
+                const status = cart.status;
+                const sqlInsertOrder = 'INSERT INTO orders(user_id,status) VALUES($1,$2)  RETURNING ord_id';
+                const sqlInsertOrderProducts = 'INSERT INTO products_orders(order_id,product_id,quantity) VALUES($1,$2,$3) RETURNING *';
+                const ord_id = (yield (yield db).query(sqlInsertOrder, [user_id, status]))
+                    .rows[0]['ord_id'];
                 const allOrder = [];
                 for (const item of cart.items) {
                     const product_id = item.product_id;
                     const quantity = item.quantity;
-                    const status = item.status;
-                    const res = (yield db).query(sql, [
-                        user_id,
+                    const res = (yield db).query(sqlInsertOrderProducts, [
+                        ord_id,
                         product_id,
                         quantity,
-                        status,
                     ]);
                     allOrder.push((yield res).rows[0]);
                 }

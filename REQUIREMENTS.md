@@ -51,15 +51,23 @@ These are the notes from a meeting with the frontend developer that describe wha
 - TABLE SCHEMA  `CREATE TABLE IF NOT EXISTS users(id SERIAL PRIMARY KEY,first_name varchar(40),last_name varchar(40),password text)`
 
 
-####  orders_products
-   Column   |    Type     | Collation | Nullable |
-------------|-------------|-----------|----------|
- id         | integer     |           | not null |
- user_id    | integer     |           |          |
- product_id | integer     |           |          |
- status     | status_code |           |          |
- quantity   | integer     |           | not null |
+####  orders
+|   Column   |    Type     | Collation | Nullable |
+|------------|-------------|-----------|----------|
+| ord_id     | integer     |           | not null |
+| user_id    | integer     |           |          |
+| status     | status_code |           |          |
+| quantity   | integer     |           | not null |
 -TYPES IN SCHEMA `CREATE TYPE  status_code AS ENUM('active','complete');`
-- TABLE SCHEMA  `CREATE TABLE orders_products (id SERIAL PRIMARY KEY,user_id int REFERENCES users(id) ON DELETE CASCADE,product_id int REFERENCES products(id) ON DELETE CASCADE,status status_code,quantity integer NOT NULL);`
+- TABLE SCHEMA  `CREATE TABLE orders_products (ord_id SERIAL PRIMARY KEY,user_id int REFERENCES users(id) ON DELETE CASCAD,status status_code,quantity integer NOT NULL);`
+
+####  prodcucts_orders
+|   Column   |  Type   | Collation | Nullable |
+|------------|---------|-----------|----------|
+| product_id | integer |           |          |
+| order_id   | integer |           |          |
+| quantity   | integer |           | not null |
+
+- TABLE SCHEMA  `CREATE TABLE products_orders(product_id int REFERENCES products(id) ,order_id int REFERENCES orders(ord_id) ,quantity integer NOT NULL);`
 
 

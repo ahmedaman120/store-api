@@ -1,3 +1,3 @@
 /* Replace with your SQL commands */
-DROP TABLE orders_products;
+DROP TABLE orders;
 DROP TYPE status_code;

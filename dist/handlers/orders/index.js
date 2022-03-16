@@ -32,11 +32,16 @@ const create = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
 //   res.json(deleted)
 // }
 const getUserOrder = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
-    const orderStore = new order_1.default();
-    console.log(req.params);
-    res.json({
-        response: yield orderStore.getCurrentOrder(req.params.id),
-    });
+    try {
+        const orderStore = new order_1.default();
+        res.json({
+            response: yield orderStore.getCurrentOrder(req.params.id),
+        });
+    }
+    catch (error) {
+        res.status(400);
+        res.json(error);
+    }
 });
 const order_handler = (app) => {
     app.post('/orders', auth_middleware_1.checkTocken, create);

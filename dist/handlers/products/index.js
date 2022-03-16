@@ -13,11 +13,16 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 const product_1 = __importDefault(require("../../models/M_product/product"));
-const auth_middleware_1 = require("../../middlewares/auth_middleware");
 const index = (_req, res) => __awaiter(void 0, void 0, void 0, function* () {
-    const p = new product_1.default();
-    const products = yield p.index();
-    res.json(products);
+    try {
+        const p = new product_1.default();
+        const products = yield p.index();
+        res.json(products);
+    }
+    catch (err) {
+        res.status(400);
+        res.json(`bad request`);
+    }
 });
 const show = (_req, res) => __awaiter(void 0, void 0, void 0, function* () {
     console.log(_req.params);
@@ -61,8 +66,8 @@ const destroy = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
 });
 const product_handler = (app) => {
     app.get('/products', index);
-    app.get('/products/:id', [auth_middleware_1.checkTocken], show);
-    app.post('/products', auth_middleware_1.checkTocken, create);
-    app.delete('/products/:id', auth_middleware_1.checkTocken, destroy);
+    app.get('/products/:id', show);
+    app.post('/products', create);
+    app.delete('/products/:id', destroy);
 };
 exports.default = product_handler;
