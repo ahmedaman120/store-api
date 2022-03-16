@@ -34,7 +34,7 @@ These are the notes from a meeting with the frontend developer that describe wha
 ## Data Shapes
 #### products
 | Column |         Type          | Collation |
---------+-----------------------+-----------+
+--------|------------------------|----------|
 | id     | integer               |           |
 | name   | character varying(40) |           |
 | price  | numeric(5,2)          |           |
@@ -43,7 +43,7 @@ These are the notes from a meeting with the frontend developer that describe wha
 
 #### users
 |   Column   |         Type          | Collation | Nullable |
-------------+-----------------------+-----------+----------+
+------------|-----------------------|-----------|----------|
 | id         | integer               |           | not null | 
 | first_name | character varying(40) |           |          |  
 | last_name  | character varying(40) |           |          |  
@@ -53,7 +53,7 @@ These are the notes from a meeting with the frontend developer that describe wha
 
 ####  orders_products
    Column   |    Type     | Collation | Nullable |
-------------+-------------+-----------+----------+
+------------|-------------|-----------|----------|
  id         | integer     |           | not null |
  user_id    | integer     |           |          |
  product_id | integer     |           |          |
