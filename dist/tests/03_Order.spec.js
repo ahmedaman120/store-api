@@ -54,6 +54,14 @@ describe('Check performance of functions', () => {
         const orders = yield orderStore.getCurrentOrder(data_1.order[0].user_id);
         expect(orders.userInfo == 1).toBeTruthy();
     }));
+    it('check getting order for user not exists', () => __awaiter(void 0, void 0, void 0, function* () {
+        try {
+            yield orderStore.getCurrentOrder(16);
+        }
+        catch (err) {
+            expect(err.message).toEqual('Cannot get order item by useID 16');
+        }
+    }));
     it('check create order with product not in our list', () => __awaiter(void 0, void 0, void 0, function* () {
         try {
             const orders = yield orderStore.create(data_1.order[1]);

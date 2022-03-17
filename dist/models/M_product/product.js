@@ -20,7 +20,6 @@ class ProductStore {
                 const conn = connector_1.default.connect();
                 const sql = 'select * from products';
                 const result = yield (yield conn).query(sql);
-                console.log(result.rows);
                 (yield conn).release();
                 return result.rows;
             }

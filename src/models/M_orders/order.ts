@@ -11,8 +11,8 @@ export type OrderReq = {
 }
 class OrderStore {
   async getCurrentOrder(userId: number): Promise<any> {
+    const db = client.connect()
     try {
-      const db = client.connect()
       const sql = 'select * from users where id=$1'
       const res = (await db).query(sql, [userId])
       const user = (await res).rows[0]
@@ -24,14 +24,18 @@ class OrderStore {
           as p on p.id=po.product_id   WHERE status='active' and o.user_id= $1;"
         const customerActiveOrder = (await db).query(sqlOrder, [user.id])
         const customerOrder = (await customerActiveOrder).rows
-        ;(await db).release()
+        // console.log(customerOrder)
         const userOrder = { userInfo: user.id, order: customerOrder }
         // console.log(userOrder)
         return userOrder
       }
     } catch (err) {
+      // console.log(err)
       throw new Error(`Cannot get order item by useID ${userId}`)
+    } finally {
+      ;(await db).release()
     }
+
   }
 
   async create(cart: OrderReq): Promise<Order[] | undefined> {

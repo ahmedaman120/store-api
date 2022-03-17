@@ -16,8 +16,8 @@ const connector_1 = __importDefault(require("../../connector"));
 class OrderStore {
     getCurrentOrder(userId) {
         return __awaiter(this, void 0, void 0, function* () {
+            const db = connector_1.default.connect();
             try {
-                const db = connector_1.default.connect();
                 const sql = 'select * from users where id=$1';
                 const res = (yield db).query(sql, [userId]);
                 const user = (yield res).rows[0];
@@ -28,14 +28,19 @@ class OrderStore {
           as p on p.id=po.product_id   WHERE status='active' and o.user_id= $1;";
                     const customerActiveOrder = (yield db).query(sqlOrder, [user.id]);
                     const customerOrder = (yield customerActiveOrder).rows;
-                    (yield db).release();
+                    // console.log(customerOrder)
                     const userOrder = { userInfo: user.id, order: customerOrder };
                     // console.log(userOrder)
                     return userOrder;
                 }
             }
             catch (err) {
+                // console.log(err)
                 throw new Error(`Cannot get order item by useID ${userId}`);
+            }
+            finally {
+                ;
+                (yield db).release();
             }
         });
     }

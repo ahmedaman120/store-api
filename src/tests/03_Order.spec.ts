@@ -46,6 +46,15 @@ describe('Check performance of functions', () => {
     const orders = await orderStore.getCurrentOrder(order[0].user_id)
     expect(orders.userInfo == 1).toBeTruthy()
   })
+  it('check getting order for user not exists', async () => {
+    try {
+      await orderStore.getCurrentOrder(16)
+    } catch (err) {
+       expect((err as unknown as Error).message as unknown as string).toEqual(
+        'Cannot get order item by useID 16'
+      )
+    }
+  })
   it('check create order with product not in our list', async () => {
     try {
       const orders = await orderStore.create(order[1])
