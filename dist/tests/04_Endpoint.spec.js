@@ -59,7 +59,7 @@ describe('Test User authentication and verification', () => {
             lname: data_1.users[3].last_name,
             password: data_1.users[3].password,
         });
-        expect(response.statusCode).toBe(400);
+        expect(response.statusCode).toBe(500);
     }));
     it('test login user by use /users/login with post request but user wrong password', () => __awaiter(void 0, void 0, void 0, function* () {
         const req = (0, supertest_1.default)(server_1.default);
@@ -68,7 +68,7 @@ describe('Test User authentication and verification', () => {
             lname: data_1.users[0].last_name,
             password: '4489494',
         });
-        expect(response.statusCode).toBe(400);
+        expect(response.statusCode).toBe(500);
     }));
     it('test login user by use /users/login with post request and responsed by jwt token', () => __awaiter(void 0, void 0, void 0, function* () {
         const req = (0, supertest_1.default)(server_1.default);

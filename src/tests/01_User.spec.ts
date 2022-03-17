@@ -76,7 +76,7 @@ describe('Check Functions performance on user Model', () => {
     }
   })
   it('test list get specific user with id 2', async () => {
-    const user: User = users[3]
+    const user: User = users[0]
     try {
       const u_json = await userStore.show(2)
       expect(
@@ -95,4 +95,12 @@ describe('Check Functions performance on user Model', () => {
     }
   })
 
+  it('test destroy user with id 2',  async () => {
+    try {
+      const res = await userStore.destroy(2)
+      expect(res).toEqual(true)
+    } catch (error) {
+      console.log(error)
+    }
+  })
 })

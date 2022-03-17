@@ -72,6 +72,7 @@ class UserStore {
                 const conn = connector_1.default.connect();
                 const sql = 'DELETE FROM users WHERE id= $1 RETURNING *';
                 const result = yield (yield conn).query(sql, [id]);
+                // console.log(result.rows)
                 const user = result.rowCount;
                 (yield conn).release();
                 // eslint-disable-next-line no-constant-condition

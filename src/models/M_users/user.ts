@@ -62,6 +62,7 @@ class UserStore {
       const conn = client.connect()
       const sql = 'DELETE FROM users WHERE id= $1 RETURNING *'
       const result = await (await conn).query(sql, [id])
+      // console.log(result.rows)
       const user: number = result.rowCount
       ;(await conn).release()
       // eslint-disable-next-line no-constant-condition

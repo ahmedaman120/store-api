@@ -20,7 +20,7 @@ export const users: User[] = [
   },
   {
     first_name: 'ahmed',
-    last_name: 'mohamed',
+    last_name: 'dahy',
     password: 'asd369',
   },
 ]

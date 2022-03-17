@@ -52,7 +52,7 @@ describe('Test User authentication and verification', () => {
       lname: users[3].last_name,
       password: users[3].password,
     })
-    expect(response.statusCode).toBe(400)
+    expect(response.statusCode).toBe(500)
   })
 
   it('test login user by use /users/login with post request but user wrong password', async () => {
@@ -62,7 +62,7 @@ describe('Test User authentication and verification', () => {
       lname: users[0].last_name,
       password: '4489494',
     })
-    expect(response.statusCode).toBe(400)
+    expect(response.statusCode).toBe(500)
   })
   it('test login user by use /users/login with post request and responsed by jwt token', async () => {
     const req = request(app)
