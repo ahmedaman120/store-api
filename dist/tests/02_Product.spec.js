@@ -54,13 +54,32 @@ describe('Check Functions performance on product Model', () => {
             console.log(error);
         }
     }));
-    it('test show product', () => __awaiter(void 0, void 0, void 0, function* () {
+    it('test show product with id 2', () => __awaiter(void 0, void 0, void 0, function* () {
         const product = data_1.products[1];
         try {
             const p_json = yield productStore.show(2);
             expect(JSON.stringify({ name: p_json[0].name })).toEqual(JSON.stringify({
                 name: product.name,
             }));
+        }
+        catch (error) {
+            console.log(error);
+        }
+    }));
+    it('test to list products', () => __awaiter(void 0, void 0, void 0, function* () {
+        try {
+            const products = yield productStore.index();
+            expect(products instanceof Array && products.length > 0).toBeTruthy();
+        }
+        catch (err) {
+            console.error(err);
+        }
+    }));
+    it('test destroy product with id 4', () => __awaiter(void 0, void 0, void 0, function* () {
+        try {
+            const test_data = data_1.products[3];
+            const res = yield productStore.destroy(4);
+            expect(JSON.stringify(res[0].name)).toEqual(JSON.stringify(test_data.name));
         }
         catch (error) {
             console.log(error);

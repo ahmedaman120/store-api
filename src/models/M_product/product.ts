@@ -11,6 +11,7 @@ class ProductStore {
       const conn = client.connect()
       const sql = 'select * from products'
       const result = await (await conn).query(sql)
+      // console.log(result.rows)
       ;(await conn).release()
       return result.rows
     } catch (err) {
@@ -44,7 +45,7 @@ class ProductStore {
   async destroy(id: number): Promise<Product[]> {
     try {
       const conn = client.connect()
-      const sql = 'DELETE FROM products WHERE id= $1 RETURNING *'
+      const sql = 'DELETE FROM products WHERE id= $1 RETURNING name,price'
       const result = await (await conn).query(sql, [id])
       const product = result.rows
       ;(await conn).release()
